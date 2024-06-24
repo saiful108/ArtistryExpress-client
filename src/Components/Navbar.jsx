@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -25,6 +25,7 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
+
 
 const products = [
   {
@@ -66,7 +67,7 @@ const callsToAction = [
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const linkCss="text-sm font-semibold leading-6 text-gray-900   -mx-3 block rounded-lg px-3 py-2 sm:text-base  sm:leading-7  hover:bg-gray-50"
+    const linkCss="text-sm font-semibold leading-6 text-gray-900   -mx-3 block rounded-lg px-3 py-2 sm:text-base  sm:leading-7  hover:bg-gray-50"
   const logoIcon=<>
   <Link to='/' className="-m-1.5 p-1.5 ">
            
@@ -77,6 +78,7 @@ const Navbar = () => {
               alt=""
             />
              <p className="">ArtistryExpress</p>
+             
            </div>
           </Link></>
           const links=<>
@@ -93,6 +95,7 @@ const Navbar = () => {
           My Art&Craft List
           </Link>
           </>
+
   return (
     <header className="bg-white">
       <nav
