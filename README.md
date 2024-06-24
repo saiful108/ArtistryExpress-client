@@ -1,4 +1,5 @@
-# React + Vite
+# ArtistryExpress-client
+
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -11,3 +12,8 @@ Currently, two official plugins are available:
 # npm 
 ## react-helmet-async
 ## lottiefiles/lottie-player
+## headlessui/react
+## React Icons
+## heroicons
+## react-router-dom
+##
