@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import {
   Dialog,
   DialogPanel,
@@ -82,16 +82,16 @@ const Navbar = () => {
            </div>
           </Link></>
           const links=<>
-          <Link  href="#" className={linkCss}>
+          <Link  to='' className={linkCss}>
             Home
           </Link>
-          <Link  href="#" className={linkCss}>
+          <Link  to='' className={linkCss}>
           All Art & craft Items
           </Link>
-          <Link  href="#" className={linkCss}>
+          <Link  to='' className={linkCss}>
           Add Craft Item
           </Link>
-          <Link  href="#" className={linkCss}>
+          <Link  to='' className={linkCss}>
           My Art&Craft List
           </Link>
           </>
@@ -178,9 +178,9 @@ const Navbar = () => {
           
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <Link to='/login' className="text-sm font-semibold leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog
@@ -235,31 +235,30 @@ const Navbar = () => {
                 </Disclosure>
                 {links}
                 {/* <a
-                  href="#"
+                  to=''
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Features
                 </a>
                 <a
-                  href="#"
+                  to=''
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Marketplace
                 </a>
                 <a
-                  href="#"
+                  to=''
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Company
                 </a> */}
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                <Link to='/login' className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                                   
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
