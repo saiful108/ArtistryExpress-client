@@ -3,6 +3,7 @@ import { FaFacebook, FaGoogle } from "react-icons/fa";
 import "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { Typewriter } from "react-simple-typewriter";
 
 const Login = () => {
     const SocialLoginButton = () => (
@@ -111,9 +112,26 @@ const Login = () => {
                             </div>
                             <div className="flex items-center max-w-lg justify-center lg:justify-start h-full">
                                 <div className="w-full">
-                                    <h2 className="text-indigo-900 dark:text-white text-3xl md:text-4xl font-bold mb-3">
+                                    {/* <h2 className="text-indigo-900 dark:text-white text-3xl md:text-4xl font-bold mb-3">
                                         Welcome to Artistry Express!
-                                    </h2>
+                                    </h2> */}
+                                     <h2 className="text-indigo-900 dark:text-white text-3xl md:text-4xl font-bold mb-3">
+                             <span className="text-indigo-900  font-bold mb-3">
+                            
+          {/* Style will be inherited from the parent element */}
+          <Typewriter
+            words={['Welcome to Artistry Express!', 'have an account?',"Please Login!"]}
+            loop={10}
+            cursor
+            cursorStyle='_'
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+            // onLoopDone={handleDone}
+            // onType={handleType}
+          />
+        </span>
+                            </h2>
                                     <div className="flex items-center mb-6 md:mb-12">
                                         <p className="mb-0 mr-2 opacity-50">Don't have an account?</p>
                                         <Link to='/signup'>Create Account</Link>

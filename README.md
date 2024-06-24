@@ -16,4 +16,5 @@ Currently, two official plugins are available:
 ## React Icons
 ## heroicons
 ## react-router-dom
-##
+## react-simple-typewriter
+TypeScript icon, indicating that this package has built-in type declarations
