@@ -18,3 +18,4 @@ Currently, two official plugins are available:
 ## react-router-dom
 ## react-simple-typewriter
 ## React Responsive Carousel
+## Firebase
