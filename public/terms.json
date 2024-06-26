@@ -1,0 +1,47 @@
+[
+    {
+    "id": "0",
+    "name": "Introduction",
+    "condition1": "Welcome to [Your Website Name]. By accessing or using our website, you agree to comply with and be bound by these terms and conditions. Please review them carefully."
+   
+},
+    {
+    "id": "1",
+    "name": "User Responsibilities",
+    "condition1": "Account Registration: Detail requirements for creating an account and maintaining its security.",
+    "condition2": "User Conduct: Specify acceptable behavior, including prohibitions on offensive content, intellectual property violations, and fraudulent activities.."
+},
+{
+    "id": "2",
+    "name": "Purchases and Payments",
+    "condition1": "Pricing: Describe how prices are determined and any applicable taxes or fees.",
+    "condition2": "Payment Methods: List accepted payment methods.",
+    "condition3": "Order Process: Explain how orders are processed, including any confirmation and shipping details."
+},
+{
+   "id":"3",
+   "name":"Returns and Refunds",
+   "condition2":"Policy: Outline your return and refund policy, including conditions for eligibility and the process for returning items."
+},
+{
+  "id": "4",
+    "name": " Shipping and Delivery",
+    "condition1": "Delivery Timeframes: Provide estimated delivery times.",
+    "condition2": "Shipping Costs: Detail how shipping costs are calculated and any options available.",
+    "condition3": "International Shipping: Include information about international orders if applicable.."  
+},
+{
+    "id": "5",
+      "name": " Disclaimers and Limitation of Liability",
+      "condition1": "Warranty Disclaimer: State that the site and its content are provided as is without warranties of any kind.",
+      "condition2": "Limitation of Liability: Limit your liability for any damages arising from the use of the site."
+       
+  },
+{
+    "id": "6",
+      "name": " Changes to Terms",
+      "condition1": "Modification Rights: Reserve the right to modify the terms and conditions at any time.",
+      "condition2": "Notification: Describe how users will be notified of changes (e.g., via email or on-site notice)."
+       
+  }
+]

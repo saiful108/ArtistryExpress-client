@@ -25,8 +25,10 @@ import {
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-
-
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip'
 const products = [
   {
     name: "Analytics",
@@ -66,6 +68,23 @@ const callsToAction = [
 
 
 const Navbar = () => {
+  const {user,logOut}=useAuth()
+  
+  const handleLogout=()=>{
+        logOut()
+    .then(()=>{
+     
+          Swal.fire({
+            title: "User Logout Successfully",
+            text: "Successfully",
+            icon: "success"
+          });
+        
+      
+     
+    })
+    .catch((error)=>console.log(error))
+  }
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const linkCss="text-sm font-semibold leading-6 text-gray-900   -mx-3 block rounded-lg px-3 py-2 sm:text-base  sm:leading-7  hover:bg-gray-50"
   const logoIcon=<>
@@ -177,11 +196,26 @@ const Navbar = () => {
           
           
         </PopoverGroup>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        {
+          user?<div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            
+          <button onClick={()=>handleLogout()} className="btn text-sm font-semibold text-gray-900">
+            Log out <span aria-hidden="true">&rarr;</span>
+          </button>
+          {
+            user&& <img src={user.photoURL} alt="user image" data-tooltip-id="my-tooltip"
+            data-tooltip-content={user.displayName} className="w-10 h-10 rounded-full " />
+          }
+          {/* tooltip */}
+          <Tooltip id="my-tooltip" />
+        </div>:<div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link to='/login' className="text-sm font-semibold leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </Link>
         </div>
+        }
+       
+      
       </nav>
       <Dialog
         className="lg:hidden"
@@ -234,32 +268,23 @@ const Navbar = () => {
                   )}
                 </Disclosure>
                 {links}
-                {/* <a
-                  to=''
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Features
-                </a>
-                <a
-                  to=''
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Marketplace
-                </a>
-                <a
-                  to=''
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Company
-                </a> */}
+                
               </div>
-              <div className="py-6">
+              {
+                user?<div className="py-6">
+                <button onClick={()=>handleLogout()} className="btn -mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"                               
+                >
+                  Logout
+                </button>
+                
+              </div>:<div className="py-6">
                 <Link to='/login' className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                    
                 >
                   Log in
                 </Link>
               </div>
+              }
             </div>
           </div>
         </DialogPanel>

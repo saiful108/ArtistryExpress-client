@@ -1,6 +1,6 @@
 
 import { Fragment, useContext, useState } from "react";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -12,39 +12,89 @@ import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-  const {creareUser}  =useAuth();
- 
+  const {creareUser,updateUserProfile,setLoading}  =useAuth();
+ const [show,setShow]=useState(false);
+ const [check,setCheck]=useState(false);
+
+
+
 const handleSignUp = (e) =>{
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photoURL=form.photoURL.value;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log(name,photoURL, email, password);
+    const imageURL=form?.imageURL?.value;
+    const email = form?.email?.value;
+    const password = form?.password?.value;
+    const check=form?.check?.checked;
+    console.log(name,imageURL, email, password,check);
+    
+    // password
+// Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
+if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)){
+    Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: " Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+        // footer: '<a href="#">Why do I have this issue?</a>'
+      });
+
+    return;
+}
+    
+if(!check){
+   
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "please accept our terms and condition",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    console.log(check)
+
+    return
+}    
+    
+    
     creareUser(email, password)
-    .then((userCredential) => {
+
+.then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log(user);
-      Swal.fire({
-        title: "User Create Successful",
-        text: `Successful`,
-        icon: "success",
+
+      updateUserProfile({displayName:name,photoURL:imageURL})
+      .then(() => {
+        setLoading(false)
+        Swal.fire({
+            title: "User Create Successful",
+            text: `Successful`,
+            icon: "success",
+          });
+        form.reset();
+      }).catch((error) => {
+        setLoading(false)
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${errorMessage}`,
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
       });
-    form.reset();
+      
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      console.log(errorCode);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: `${errorMessage}`,
-        footer: '<a href="#">Why do I have this issue?</a>'
+        text: " Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+        // footer: '<a href="#">Why do I have this issue?</a>'
       });
+      setLoading(false)
     });
 }
 
@@ -80,7 +130,7 @@ const handleSignUp = (e) =>{
                 </button>
             </div>
             <div className="w-full md:w-1/2">
-                <button  className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
+                <button type="button"   className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
                     <FaGoogle className="text-white text-2xl" />
                     <span className="w-full text-center text-white">
                         Continue with Google
@@ -137,7 +187,7 @@ const handleSignUp = (e) =>{
                         type="text"
                         className="w-full bg-blue-50 dark:bg-slate-700 min-h-[48px] leading-10 px-4 p-2 rounded-lg outline-none border border-transparent focus:border-blue-600"
                         id="photoURL"
-                        name="photoURL"
+                        name="imageURL"
                         placeholder="Enter photoURL"
                     />
                 </div>
@@ -157,26 +207,27 @@ const handleSignUp = (e) =>{
                     <label className="block mb-2 font-normal" htmlFor="password">
                         Password
                     </label>
+                    <div className="flex items-center">
                     <input
-                        type="password"
+                        type={show ? "text" : "password"}
                         className="w-full bg-blue-50 dark:bg-slate-700 min-h-[48px] leading-10 px-4 p-2 rounded-lg outline-none border border-transparent focus:border-blue-600"
                         id="password"
                         name="password"
                         placeholder="Enter Password"
                     />
+                    <span className="-ml-8" onClick={()=>setShow(!show)}>{show ? <FaEyeSlash /> : <FaEye/>}</span>
+                    </div>
                 </div>
-                {/* <div className="mb-4">
-                    <input type="checkbox" className="mr-2" id="remember-me" checked />
-                    <label className="font-normal" htmlFor="remember-me">
-                        Remember me
+                <div className="mb-4">
+                    <input type="checkbox" name="check" className="mr-2" id="check"  />
+                    <label className="font-normal" htmlFor="check">
+                        accept <Link to="/terms">Terms and Condition</Link>
                     </label>
-                </div> */}
+                </div>
                 <button className="bg-gray-900 bg-opacity-90 hover:bg-opacity-100 text-white px-7 py-3 rounded w-full">
                     Sign Up
                 </button>
-                <button className="hover:text-blue-600 py-2 px-4 rounded-lg">
-                    Forget your password?
-                </button>
+               
             </form>
 
                         </div>

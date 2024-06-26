@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { FaFacebook, FaGoogle } from "react-icons/fa";
+import { Fragment, useState } from "react";
+import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
 import "@lottiefiles/lottie-player";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
  const {signInUser,user}=useAuth();
+ const [show,setShow]=useState(false);
  const handleLogin =e=> {
    e.preventDefault();
    const form=e.target;
@@ -123,13 +124,16 @@ const Login = () => {
                 <label className="block mb-2 font-normal" htmlFor="password">
                     Password
                 </label>
-                <input
-                    type="password"
-                    className="w-full bg-blue-50 dark:bg-slate-700 min-h-[48px] leading-10 px-4 p-2 rounded-lg outline-none border border-transparent focus:border-blue-600"
-                    id="password"
-                    name="password"
-                    placeholder="Enter Password"
-                />
+                <div className="flex items-center">
+                    <input
+                        type={show ? "text" : "password"}
+                        className="w-full bg-blue-50 dark:bg-slate-700 min-h-[48px] leading-10 px-4 p-2 rounded-lg outline-none border border-transparent focus:border-blue-600"
+                        id="password"
+                        name="password"
+                        placeholder="Enter Password"
+                    />
+                    <span className="-ml-8" onClick={()=>setShow(!show)}>{show ? <FaEyeSlash /> : <FaEye/>}</span>
+                    </div>
             </div>
             {/* <div className="mb-4">
                 <input type="checkbox" className="mr-2" id="remember-me" checked />
