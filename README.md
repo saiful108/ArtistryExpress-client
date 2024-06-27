@@ -20,3 +20,5 @@ Currently, two official plugins are available:
 ## React Responsive Carousel
 ## Firebase
 ## react-tooltip
+## React Spinners
+

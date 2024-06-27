@@ -5,6 +5,8 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Auth/Login";
 import SignUp from "../Pages/Auth/SignUp";
 import TermsCondition from "../terms/TermsCondition";
+import PrivateRoute from "../../Utility/PrivateRoute";
+import Features from "../Components/Features";
 
 
  export const router = createBrowserRouter([
@@ -15,7 +17,7 @@ import TermsCondition from "../terms/TermsCondition";
       children: [
         {
           path: "/",
-          element:<Home/>,
+          element:<PrivateRoute><Home/></PrivateRoute>,
         },
         {
             path:'signup',
@@ -28,6 +30,10 @@ import TermsCondition from "../terms/TermsCondition";
         {
           path:'/terms',
           element:<TermsCondition/>
+        },
+        {
+          path:'/features',
+          element:<PrivateRoute><Features/></PrivateRoute>
         }
       ],
     },

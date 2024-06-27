@@ -1,15 +1,73 @@
 import { Fragment, useState } from "react";
-import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import "@lottiefiles/lottie-player";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Typewriter } from "react-simple-typewriter";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
- const {signInUser,user}=useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
+ const {signInUser,user,googleSignIn, githubSignIn,loading,setLoading}=useAuth();
  const [show,setShow]=useState(false);
+
+
+
+
+
+ const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        setLoading(false);
+        navigate(location?.state ? location.state : "/");
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login Successful",
+            showConfirmButton: false,
+            timer: 1500
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+      });
+  };
+
+  // github sign in
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        setLoading(false);
+        navigate(location?.state ? location.state : "/");
+         Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      })
+      .catch((err) => {
+        setLoading(false);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+       
+      });
+  };
+
+
  const handleLogin =e=> {
    e.preventDefault();
    const form=e.target;
@@ -21,6 +79,8 @@ const Login = () => {
    .then(result=>{
     const user=result.user;
     console.log(user);
+    setLoading(false);
+   navigate(location?.state ? location.state : "/");
     Swal.fire({
         title: "User Login Successful",
         text: `${user?.email}!`,
@@ -62,15 +122,15 @@ const Login = () => {
                 <div className="flex flex-wrap md:flex-nowrap items-center gap-6 lg:mr-40 xl:mr-52 lg:mb-6">
                 <Fragment>
         <div className="w-full md:w-1/2">
-            <button  className="w-full flex justify-center items-center bg-blue-600 rounded py-4 px-5 mb-3">
-                <FaFacebook className="text-white text-2xl" />
+            <button onClick={handleGithubSignIn}  className="w-full flex justify-center items-center bg-blue-600 rounded py-4 px-5 mb-3">
+                <FaGithub  className="text-white text-2xl" />
                 <span className="w-full text-center text-white">
                     Continue with Facebook
                 </span>
             </button>
         </div>
         <div className="w-full md:w-1/2">
-            <button  className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
+            <button onClick={handleGoogleSignIn}  className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
                 <FaGoogle className="text-white text-2xl" />
                 <span className="w-full text-center text-white">
                     Continue with Google

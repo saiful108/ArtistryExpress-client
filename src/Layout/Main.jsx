@@ -1,14 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { useState } from "react";
 
 
 const Main = () => {
+    const [darkMode, setDarkMode] = useState(false);
     return (
-        <div className="max-w-6xl mx-auto">
-            <Navbar/>
-           <Outlet/>
-           <Footer></Footer> 
+        <div className={`${darkMode ? "dark" : ""} dark:bg-[#0F172A] h-screen`}>
+            <Navbar setDarkMode={setDarkMode} darkMode={darkMode}  />
+          <div className="w-full  dark:bg-[#0F172A]"> <Outlet/></div>
+          <div> <Footer></Footer> </div>
         </div>
     );
 };

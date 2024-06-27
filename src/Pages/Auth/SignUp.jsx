@@ -1,8 +1,8 @@
 
-import { Fragment, useContext, useState } from "react";
-import { FaEye, FaEyeSlash, FaFacebook, FaGoogle } from "react-icons/fa";
+import { Fragment,  useState } from "react";
+import { FaEye, FaEyeSlash,FaGithub, FaGoogle } from "react-icons/fa";
 import "@lottiefiles/lottie-player";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Typewriter } from "react-simple-typewriter";
 import useAuth from "../../Hooks/useAuth";
@@ -12,10 +12,61 @@ import Swal from "sweetalert2";
 
 
 const SignUp = () => {
-  const {creareUser,updateUserProfile,setLoading}  =useAuth();
+  const {creareUser,updateUserProfile,setLoading,googleSignIn,githubSignIn}  =useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
  const [show,setShow]=useState(false);
  const [check,setCheck]=useState(false);
+// google sign in
+const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        setLoading(false);
+        navigate(location?.state ? location.state : "/");
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Login Successful",
+            showConfirmButton: false,
+            timer: 1500
+          });
+      })
+      .catch((err) => {
+        setLoading(false);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+      });
+  };
 
+  // github sign in
+  const handleGithubSignIn = () => {
+    githubSignIn()
+      .then((result) => {
+        setLoading(false);
+        navigate(location?.state ? location.state : "/");
+         Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Login Successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      })
+      .catch((err) => {
+        setLoading(false);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: `${err.message}`,
+            // footer: '<a href="#">Why do I have this issue?</a>'
+          });
+       
+      });
+  };
 
 
 const handleSignUp = (e) =>{
@@ -65,6 +116,7 @@ if(!check){
       updateUserProfile({displayName:name,photoURL:imageURL})
       .then(() => {
         setLoading(false)
+        navigate(location?.state ? location.state : "/");
         Swal.fire({
             title: "User Create Successful",
             text: `Successful`,
@@ -123,14 +175,14 @@ if(!check){
                     <Fragment>
             <div className="w-full md:w-1/2">
                 <button  className="w-full flex justify-center items-center bg-blue-600 rounded py-4 px-5 mb-3">
-                    <FaFacebook className="text-white text-2xl" />
+                    <FaGithub onClick={handleGithubSignIn} className="text-white text-2xl" />
                     <span className="w-full text-center text-white">
                         Continue with Facebook
                     </span>
                 </button>
             </div>
             <div className="w-full md:w-1/2">
-                <button type="button"   className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
+                <button onClick={handleGoogleSignIn} type="button"   className="w-full flex justify-center items-center bg-red-500 rounded py-4 px-5 mb-3">
                     <FaGoogle className="text-white text-2xl" />
                     <span className="w-full text-center text-white">
                         Continue with Google

@@ -24,11 +24,13 @@ import {
   PhoneIcon,
   PlayCircleIcon,
 } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
-import 'react-tooltip/dist/react-tooltip.css'
-import { Tooltip } from 'react-tooltip'
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
+import dark from "../assets/dark.png";
+import light from "../assets/light.png";
 const products = [
   {
     name: "Analytics",
@@ -67,7 +69,7 @@ const callsToAction = [
 ];
 
 
-const Navbar = () => {
+const Navbar = ({darkMode, setDarkMode}) => {
   const {user,logOut}=useAuth()
   
   const handleLogout=()=>{
@@ -101,22 +103,60 @@ const Navbar = () => {
            </div>
           </Link></>
           const links=<>
-          <Link  to='' className={linkCss}>
+          <NavLink  to='/'  className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-[#f35582] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#6c152d]"
+                }>
             Home
-          </Link>
-          <Link  to='' className={linkCss}>
+          </NavLink>
+          <NavLink  to='/a'  className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-[#f35582] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#6c152d]"
+                }>
           All Art & craft Items
-          </Link>
-          <Link  to='' className={linkCss}>
+          </NavLink>
+          <NavLink  to='/b'  className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-[#f35582] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#6c152d]"
+                }>
           Add Craft Item
-          </Link>
-          <Link  to='' className={linkCss}>
+          </NavLink>
+          <NavLink  to='/features'  className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? "text-[#f35582] border-b-4 border-[#FF497C]"
+                    : "hover:text-[#6c152d]"
+                }>
           My Art&Craft List
-          </Link>
+          </NavLink>
+
+          <div className=" w-[50px]">
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className=" p-1 mr-3 flex items-center"
+            >
+              <img
+                className="md:w-full   w-10 object-cover"
+                src={darkMode ? light : dark}
+                alt=""
+              />
+            </button>
+          </div>
+          
           </>
 
   return (
-    <header className="bg-white">
+    <header className="bg-white ">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
