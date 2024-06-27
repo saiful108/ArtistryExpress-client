@@ -7,6 +7,7 @@ import SignUp from "../Pages/Auth/SignUp";
 import TermsCondition from "../terms/TermsCondition";
 import PrivateRoute from "../../Utility/PrivateRoute";
 import Features from "../Components/Features";
+import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
 
 
  export const router = createBrowserRouter([
@@ -34,6 +35,10 @@ import Features from "../Components/Features";
         {
           path:'/features',
           element:<PrivateRoute><Features/></PrivateRoute>
+        },
+        {
+          path:'/addItem',
+          element:<AddCraftItem/>
         }
       ],
     },

@@ -121,7 +121,7 @@ const Navbar = ({darkMode, setDarkMode}) => {
                 }>
           All Art & craft Items
           </NavLink>
-          <NavLink  to='/b'  className={({ isActive, isPending }) =>
+          <NavLink  to='/addItem'  className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
                     : isActive
