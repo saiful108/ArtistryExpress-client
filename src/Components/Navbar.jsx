@@ -130,7 +130,7 @@ const Navbar = ({darkMode, setDarkMode}) => {
                 }>
           Add Craft Item
           </NavLink>
-          <NavLink  to='/features'  className={({ isActive, isPending }) =>
+          <NavLink  to='/email'  className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
                     : isActive

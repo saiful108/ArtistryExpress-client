@@ -10,6 +10,8 @@ import Features from "../Components/Features";
 import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
 import AllProduct from "../Pages/AllProduct/AllProduct";
 import DetailPage from "../Pages/Detail Page/DetailPage";
+import MyProduct from "../Pages/MyProduct/MyProduct";
+
 
 
 
@@ -21,7 +23,7 @@ import DetailPage from "../Pages/Detail Page/DetailPage";
       children: [
         {
           path: "/",
-          element:<PrivateRoute><Home/></PrivateRoute>,
+          element:<Home/>,
         },
         {
             path:'signup',
@@ -37,11 +39,11 @@ import DetailPage from "../Pages/Detail Page/DetailPage";
         },
         {
           path:'/features',
-          element:<PrivateRoute><Features/></PrivateRoute>
+          element:<Features/>
         },
         {
           path:'/addItem',
-          element:<AddCraftItem/>
+          element:<PrivateRoute><AddCraftItem/></PrivateRoute>
         },
         {
           path:'/products',
@@ -50,8 +52,13 @@ import DetailPage from "../Pages/Detail Page/DetailPage";
         },
         {
           path:'/products/:id',
-          element:<DetailPage/>,
+          element:<PrivateRoute><DetailPage/></PrivateRoute>,
           loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
+        },
+        {
+          path:'/email',
+          element:<PrivateRoute><MyProduct/></PrivateRoute>,
+          loader: () =>fetch(`http://localhost:5000/products`),
         }
       ],
     },

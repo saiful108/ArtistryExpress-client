@@ -81,22 +81,22 @@ const handleSignUp = (e) =>{
     
     // password
 // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)){
-    Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: " Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
-        // footer: '<a href="#">Why do I have this issue?</a>'
-      });
+// if(!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password)){
+//     Swal.fire({
+//         icon: "error",
+//         title: "Oops...",
+//         text: " Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character",
+//         // footer: '<a href="#">Why do I have this issue?</a>'
+//       });
 
-    return;
-}
+//     return;
+// }
     
 if(!check){
    
     Swal.fire({
         position: "top-end",
-        icon: "success",
+        icon: "error",
         title: "please accept our terms and condition",
         showConfirmButton: false,
         timer: 1500
