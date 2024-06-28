@@ -9,6 +9,7 @@ import PrivateRoute from "../../Utility/PrivateRoute";
 import Features from "../Components/Features";
 import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
 import AllProduct from "../Pages/AllProduct/AllProduct";
+import DetailPage from "../Pages/Detail Page/DetailPage";
 
 
 
@@ -46,6 +47,11 @@ import AllProduct from "../Pages/AllProduct/AllProduct";
           path:'/products',
           element:<AllProduct/>,
           loader: () =>fetch(`http://localhost:5000/products`),
+        },
+        {
+          path:'/products/:id',
+          element:<DetailPage/>,
+          loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
         }
       ],
     },

@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 
 const AllProduct = () => {
@@ -19,7 +19,7 @@ const AllProduct = () => {
                   <p className="font-bold text-xl">Price: $ {product?.price}</p>
                   
                   <div className="flex items-center  mt-10">
-                  <button className="btn bg-[#F96061] w-full font-semibold text-white">Details</button>
+                  <Link to={`/products/${product?._id}`} className="btn bg-[#F96061] w-full font-semibold text-white">Details</Link>
                   </div>
                 </div>
               </div>
