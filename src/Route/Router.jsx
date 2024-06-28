@@ -8,6 +8,8 @@ import TermsCondition from "../terms/TermsCondition";
 import PrivateRoute from "../../Utility/PrivateRoute";
 import Features from "../Components/Features";
 import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
+import AllProduct from "../Pages/AllProduct/AllProduct";
+
 
 
  export const router = createBrowserRouter([
@@ -39,6 +41,11 @@ import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
         {
           path:'/addItem',
           element:<AddCraftItem/>
+        },
+        {
+          path:'/products',
+          element:<AllProduct/>,
+          loader: () =>fetch(`http://localhost:5000/products`),
         }
       ],
     },

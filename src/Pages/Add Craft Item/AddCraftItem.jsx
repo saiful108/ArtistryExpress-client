@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const AddCraftItem = () => {
     const {user}=useAuth()
@@ -32,6 +34,26 @@ const AddCraftItem = () => {
       stock
     };
     console.log(newProduct);
+
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+            Swal.fire({
+                title: "Sucessful",
+                text: "Product Add Sucessfully",
+                icon: "success",
+              });
+          form.reset();
+        }
+      });
   };
   return (
     <div className="gadgetContainer pt-10 mx-5">
@@ -79,14 +101,23 @@ const AddCraftItem = () => {
                 type="text"
                 placeholder="Select subcategory"
               >
-                <option value="Test" selected>
-                  Test1
+                <option value="Landscape Painting" selected>
+                Landscape Painting
                 </option>
-                <option value="Test2" selected>
-                  Test2
+                <option value=" Portrait Drawing" selected>
+                Portrait Drawing
                 </option>
-                <option value="Test3" selected>
-                  Test3
+                <option value="Water colour Painting" selected>
+                Water colour Painting
+                </option>
+                <option value="Oil Painting" selected>
+                Oil Painting
+                </option>
+                <option value="Charcoal Sketching" selected>
+                Charcoal Sketching
+                </option>
+                <option value="Cartoon Drawing" selected>
+                Cartoon Drawing
                 </option>
               </select>
 
@@ -118,10 +149,10 @@ const AddCraftItem = () => {
                 type="text"
                 placeholder="Select customization"
               >
-                <option value="Test" selected>
+                <option value="Yes" selected>
                   Yes
                 </option>
-                <option value="Test2" selected>
+                <option value="No" selected>
                   No
                 </option>
               </select>
@@ -182,10 +213,10 @@ const AddCraftItem = () => {
                 type="text"
                 placeholder="Select stock"
               >
-                <option value="Test" selected>
+                <option value="In stock" selected>
                 In stock 
                 </option>
-                <option value="Test2" selected>
+                <option value="Made to Order" selected>
                 Made to Order
                 </option>
               </select>
@@ -198,7 +229,7 @@ const AddCraftItem = () => {
               >
                 Description
               </label>
-              <textarea className="textarea textarea-bordered h-24" placeholder="Bio"></textarea>
+              {/* <textarea className="textarea textarea-bordered h-24" placeholder="Bio"></textarea> */}
               <input
                 className="w-full p-2 border rounded-md focus:outline-[#FF497C]"
                 type="text"

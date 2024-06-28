@@ -112,7 +112,7 @@ const Navbar = ({darkMode, setDarkMode}) => {
                 }>
             Home
           </NavLink>
-          <NavLink  to='/a'  className={({ isActive, isPending }) =>
+          <NavLink  to='/products'  className={({ isActive, isPending }) =>
                   isPending
                     ? "pending"
                     : isActive
