@@ -3,13 +3,34 @@ import useAuth from "../../Hooks/useAuth";
 import { FaDeleteLeft } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
+import { useEffect, useState } from "react";
 
 
 const MyProduct = () => {
-const products=useLoaderData();
 const {user}=useAuth() || {};
+const products=useLoaderData();
+const [product,setProduct]=useState([products])
 const data=products.filter(pd=>pd.email==user?.email)
 console.log(data)
+const handleDelete=_id=>{
+    console.log(_id)
+    
+        fetch(`http://localhost:5000/products/${_id}`,{
+            method:"DELETE"
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          if(data.deletedCount>0){
+            alert("deleted successfully")
+            const reamaining=products.filter(pd=>pd._id!==_id)
+            setProduct(reamaining)
+            }
+           
+           
+        })
+   
+}
+
     return (
        
         <section className="text-gray-600 body-font">
@@ -26,7 +47,7 @@ console.log(data)
                   <p className="font-bold text-xl">Price: $ {product?.price}</p>
                   <div className="flex justify-between gap-5">    
                   <Link to={`/update/${product?._id}`} className="btn border-green-600 text-black font-semibold "><GrUpdate />Product</Link>
-                  <button  className="btn  border-green-600 text-black font-semibold "><MdDelete/> Product</button>
+                  <button onClick={()=>handleDelete(product?._id)} className="btn  border-green-600 text-black font-semibold "><MdDelete/> Product</button>
                   </div>
                   <div className="flex items-center  mt-10">
                   

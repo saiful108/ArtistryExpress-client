@@ -54,10 +54,12 @@ const UpdateProduct = () => {
                     text: "Update Product Sucessfully",
                     icon: "success",
                   });
-              form.reset();
+             
             }
+            form.reset();
           });
       };
+    
     return (
         <div className="gadgetContainer pt-10 mx-5">
         <div className="shadow-lg p-5 border dark:bg-[#1a2641d5]">
