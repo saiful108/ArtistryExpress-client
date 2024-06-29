@@ -11,6 +11,7 @@ import AddCraftItem from "../Pages/Add Craft Item/AddCraftItem";
 import AllProduct from "../Pages/AllProduct/AllProduct";
 import DetailPage from "../Pages/Detail Page/DetailPage";
 import MyProduct from "../Pages/MyProduct/MyProduct";
+import UpdateProduct from "../Pages/Update/UpdateProduct";
 
 
 
@@ -59,6 +60,13 @@ import MyProduct from "../Pages/MyProduct/MyProduct";
           path:'/email',
           element:<PrivateRoute><MyProduct/></PrivateRoute>,
           loader: () =>fetch(`http://localhost:5000/products`),
+        },
+        {
+          path:'/update/:id',
+          element:<PrivateRoute>
+            <UpdateProduct/>
+          </PrivateRoute>,
+          loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
         }
       ],
     },

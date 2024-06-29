@@ -23,6 +23,10 @@ const DetailPage = () => {
           <span className="text-gray-500">Processing</span>
           <span className="ml-auto text-gray-900">{data.processing}</span>
         </div>
+        <div className="flex border-t border-gray-200 py-2">
+          <span className="text-gray-500">Stock</span>
+          <span className="ml-auto text-gray-900">{data.stock}</span>
+        </div>
         <div className="flex border-t border-b mb-6 border-gray-200 py-2">
           <span className="text-gray-500">Rating</span>
           <span className="ml-auto text-gray-900">{data.rating}</span>

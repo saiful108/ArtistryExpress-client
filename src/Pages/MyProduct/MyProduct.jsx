@@ -1,5 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { FaDeleteLeft } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
+import { GrUpdate } from "react-icons/gr";
 
 
 const MyProduct = () => {
@@ -21,9 +24,12 @@ console.log(data)
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{product?.subcategory}</h2>
                   <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{product?.name} <div className="badge badge-secondary">{product?.stock}</div></h1> 
                   <p className="font-bold text-xl">Price: $ {product?.price}</p>
-                  
+                  <div className="flex justify-between gap-5">    
+                  <Link to={`/update/${product?._id}`} className="btn border-green-600 text-black font-semibold "><GrUpdate />Product</Link>
+                  <button  className="btn  border-green-600 text-black font-semibold "><MdDelete/> Product</button>
+                  </div>
                   <div className="flex items-center  mt-10">
-                  <Link to={`/products/${product?._id}`} className="btn bg-[#F96061] w-full font-semibold text-white">Details</Link>
+                  
                   </div>
                 </div>
               </div>
