@@ -1,9 +1,11 @@
 import { Link, useLoaderData } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import { FaDeleteLeft } from "react-icons/fa6";
+
 import { MdDelete } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
+import Swal from "sweetalert2";
+
 
 
 const MyProduct = () => {
@@ -21,9 +23,26 @@ const handleDelete=_id=>{
         .then(res=>res.json())
         .then(data=>{
           if(data.deletedCount>0){
-            alert("deleted successfully")
-            const reamaining=products.filter(pd=>pd._id!==_id)
-            setProduct(reamaining)
+            Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success"
+                });
+              }
+              const reamaining=products.filter(pd=>pd._id!==_id)
+              setProduct(reamaining)
+            });
+           
             }
            
            
@@ -31,11 +50,23 @@ const handleDelete=_id=>{
    
 }
 
+
+  
+
+
+// Function to handle filter change
+
+
     return (
        
         <section className="text-gray-600 body-font">
+         
+         
+          
+        
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap  items-center -m-4">
+         
           
            {
             data?.map(product=> <div key={product._id} className="p-4 md:w-1/3">

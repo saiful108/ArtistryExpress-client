@@ -101,10 +101,10 @@ const AddCraftItem = () => {
                 type="text"
                 placeholder="Select subcategory"
               >
-                <option value="Landscape Painting" selected>
+                <option value="Landscape Painting"selected>
                 Landscape Painting
                 </option>
-                <option value=" Portrait Drawing" selected>
+                <option value="Portrait Drawing" selected>
                 Portrait Drawing
                 </option>
                 <option value="Water colour Painting" selected>
@@ -149,10 +149,10 @@ const AddCraftItem = () => {
                 type="text"
                 placeholder="Select customization"
               >
-                <option value="Yes" selected>
+                <option value="yes" selected>
                   Yes
                 </option>
-                <option value="No" selected>
+                <option value="no" selected>
                   No
                 </option>
               </select>

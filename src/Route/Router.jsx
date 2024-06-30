@@ -12,6 +12,8 @@ import AllProduct from "../Pages/AllProduct/AllProduct";
 import DetailPage from "../Pages/Detail Page/DetailPage";
 import MyProduct from "../Pages/MyProduct/MyProduct";
 import UpdateProduct from "../Pages/Update/UpdateProduct";
+import Catagories from "../Pages/Category/Catagories";
+import ProductAll from "../Pages/AllProduct/ProductAll";
 
 
 
@@ -51,6 +53,7 @@ import UpdateProduct from "../Pages/Update/UpdateProduct";
           element:<AllProduct/>,
           loader: () =>fetch(`http://localhost:5000/products`),
         },
+        
         {
           path:'/products/:id',
           element:<PrivateRoute><DetailPage/></PrivateRoute>,
@@ -67,6 +70,12 @@ import UpdateProduct from "../Pages/Update/UpdateProduct";
             <UpdateProduct/>
           </PrivateRoute>,
           loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
+        },
+        {
+          path:'/catagory',
+          element:<Catagories/>,
+          loader: () =>fetch('http://localhost:5000/products'),
+         
         }
       ],
     },
