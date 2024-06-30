@@ -22,3 +22,9 @@ Currently, two official plugins are available:
 ## react-tooltip
 ## React Spinners
 
+# Features
+
+
+##  Live Preview
+
+[ArtistryExpress](https://choosealicense.com/licenses/mit/)

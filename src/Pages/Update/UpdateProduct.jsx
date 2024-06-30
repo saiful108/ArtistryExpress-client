@@ -1,10 +1,12 @@
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const UpdateProduct = () => {
     const {user}=useAuth()||{};
+    const navigate=useNavigate()
     const lodedData=useLoaderData()
     console.log(lodedData,'lodedData')
     const handleUpdateProduct = (e) => {
@@ -37,7 +39,7 @@ const UpdateProduct = () => {
         };
         console.log(newProduct);
     
-        fetch(`http://localhost:5000/products/${lodedData._id}`, {
+        fetch(`https://artistry-express-server.vercel.app/products/${lodedData._id}`, {
           method: "put",
           headers: {
             "content-type": "application/json",
@@ -57,11 +59,16 @@ const UpdateProduct = () => {
              
             }
             form.reset();
+            navigate('/email')
           });
       };
     
     return (
         <div className="gadgetContainer pt-10 mx-5">
+           <Helmet>
+        <title>ArtistryExpress || Update Page</title>
+        
+      </Helmet>
         <div className="shadow-lg p-5 border dark:bg-[#1a2641d5]">
           {/* Heading */}
           <div className="mt-5 mb-8">

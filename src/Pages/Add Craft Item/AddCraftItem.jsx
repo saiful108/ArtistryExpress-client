@@ -1,9 +1,12 @@
 
+import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
+
 const AddCraftItem = () => {
-    const {user}=useAuth()
+    const {user}=useAuth()||{};
+   
     console.log(user.displayName);
   const handleAddProduct = (e) => {
     e.preventDefault();
@@ -35,7 +38,7 @@ const AddCraftItem = () => {
     };
     console.log(newProduct);
 
-    fetch("http://localhost:5000/products", {
+    fetch("https://artistry-express-server.vercel.app/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -52,11 +55,17 @@ const AddCraftItem = () => {
                 icon: "success",
               });
           form.reset();
+          
         }
       });
   };
   return (
     <div className="gadgetContainer pt-10 mx-5">
+       <Helmet>
+        <title>ArtistryExpress || Add Product Page</title>
+        
+      </Helmet>
+
       <div className="shadow-lg p-5 border dark:bg-[#1a2641d5]">
         {/* Heading */}
         <div className="mt-5 mb-8">

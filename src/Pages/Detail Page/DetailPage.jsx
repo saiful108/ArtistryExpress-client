@@ -1,10 +1,15 @@
 
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 const DetailPage = () => {
     const data=useLoaderData()||{}
     console.log(data.price)
     return (
         <section className="text-gray-600 body-font overflow-hidden">
+           <Helmet>
+        <title>ArtistryExpress || Details</title>
+        
+      </Helmet>
   <div className="container px-5 py-24 mx-auto">
     <div className="lg:w-4/5 mx-auto flex flex-wrap">
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">

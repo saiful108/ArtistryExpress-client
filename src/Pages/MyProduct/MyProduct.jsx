@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
 import {  useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -13,11 +14,27 @@ const {user}=useAuth() || {};
 const products=useLoaderData();
 const [product,setProduct]=useState([products])
 const data=products.filter(pd=>pd.email==user?.email)
+const [filter, setFilter] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
+  const handleFilterChange = (customization) => {
+    setFilter(customization);
+    if (customization === '') {
+      setFilteredData(data);
+    }
+    else if(customization === 'yes'){
+      const newFilteredData = data.filter(item => item.customization === customization);
+      setFilteredData(newFilteredData);
+    }
+    else if(customization === 'no'){
+      const newFilteredData = data.filter(item => item.customization === customization);
+      setFilteredData(newFilteredData);
+    }
+  }
 console.log(data)
 const handleDelete=_id=>{
     console.log(_id)
     
-        fetch(`http://localhost:5000/products/${_id}`,{
+        fetch(`https://artistry-express-server.vercel.app/products/${_id}`,{
             method:"DELETE"
         })
         .then(res=>res.json())
@@ -60,16 +77,35 @@ const handleDelete=_id=>{
     return (
        
         <section className="text-gray-600 body-font">
-         
-         
-          
+          <Helmet>
+        <title>ArtistryExpress || User Product Page</title>
+        
+      </Helmet>
+      <div className="dropdown grid justify-center">
+        <p>Filter By Customization</p>
+        
+        <div className="dropdown dropdown-hover">
+  <div tabIndex={0} role="button" className="btn m-1">Filter</div>
+  <ul tabIndex={0} className="dropdown-content dropdown-primary  w-full max-w-xs menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+   <li className="mb-2"> <button className="btn  border-green-600 text-black font-semibold " onClick={() => handleFilterChange('')}>All</button></li>
+   <li className="mb-2"><button type="button" className="btn  border-green-600 text-black font-semibold " onClick={() => handleFilterChange('yes')}>Yes</button></li>
+    <li className="mb-2"><button className="btn  border-green-600 text-black font-semibold " onClick={() => handleFilterChange('no')}>No</button></li>
+  </ul>
+</div>
+  
+</div>
+
         
         <div className="container px-5 py-24 mx-auto">
+          
+        
+        
+        
           <div className="flex flex-wrap  items-center -m-4">
          
           
            {
-            data?.map(product=> <div key={product._id} className="p-4 md:w-1/3">
+            filteredData?.map(product=> <div key={product._id} className="p-4 md:w-1/3">
               <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                 <img className="lg:h-64 md:h-36 w-full object-cover object-center" src={product?.image} alt="blog"/>
                 <div className="p-6">

@@ -13,7 +13,7 @@ import DetailPage from "../Pages/Detail Page/DetailPage";
 import MyProduct from "../Pages/MyProduct/MyProduct";
 import UpdateProduct from "../Pages/Update/UpdateProduct";
 import Catagories from "../Pages/Category/Catagories";
-import ProductAll from "../Pages/AllProduct/ProductAll";
+
 
 
 
@@ -51,30 +51,30 @@ import ProductAll from "../Pages/AllProduct/ProductAll";
         {
           path:'/products',
           element:<AllProduct/>,
-          loader: () =>fetch(`http://localhost:5000/products`),
+          loader: () =>fetch(`https://artistry-express-server.vercel.app/products`),
         },
         
         {
           path:'/products/:id',
           element:<PrivateRoute><DetailPage/></PrivateRoute>,
-          loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
+          loader: ({params}) =>fetch(`https://artistry-express-server.vercel.app/products/${params.id}`),
         },
         {
           path:'/email',
           element:<PrivateRoute><MyProduct/></PrivateRoute>,
-          loader: () =>fetch(`http://localhost:5000/products`),
+          loader: () =>fetch(`https://artistry-express-server.vercel.app/products`),
         },
         {
           path:'/update/:id',
           element:<PrivateRoute>
             <UpdateProduct/>
           </PrivateRoute>,
-          loader: ({params}) =>fetch(`http://localhost:5000/products/${params.id}`),
+          loader: ({params}) =>fetch(`https://artistry-express-server.vercel.app/products/${params.id}`),
         },
         {
           path:'/catagory',
           element:<Catagories/>,
-          loader: () =>fetch('http://localhost:5000/products'),
+          loader: () =>fetch('https://artistry-express-server.vercel.app/products'),
          
         }
       ],

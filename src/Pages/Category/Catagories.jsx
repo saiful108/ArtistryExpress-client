@@ -9,7 +9,7 @@ const Catagories = () => {
  
   const [product,setProduct]=useState([])
   useEffect(()=>{
-    fetch('http://localhost:5000/products')
+    fetch('https://artistry-express-server.vercel.app/products')
     .then(res=>res.json())
     .then(data=>setProduct(data))
   },[])
