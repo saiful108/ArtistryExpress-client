@@ -55,6 +55,7 @@ const AddCraftItem = () => {
                 icon: "success",
               });
           form.reset();
+          // window.location.reload();
           
         }
       });
